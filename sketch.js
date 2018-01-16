@@ -35,7 +35,7 @@ function Ret(x) {
 		rectMode(CENTER);
 		noStroke();
 		rect(this.x,this.y,this.w,this.h);
-		//fill(255);
+		fill(255);
 	}
 	this.move = function() {
 		if(keyIsDown(UP_ARROW) && this.y - this.h/2 > 5){
