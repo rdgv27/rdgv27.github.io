@@ -1,11 +1,11 @@
-let w = 600;
-let h = 400;
+let w = 1000;
+let h = 600;
 let grad = 20;
-let ace = 0.3;
+let ace = 0.35;
 let pot = 0;
 
 function setup() {
-    createCanvas(w,h);
+    createCanvas(w, h);
 	b = new Bola();
 	r1 = new Ret(grad);
 	r2 = new Ret(w-grad);
@@ -19,12 +19,12 @@ function draw() {
 	
 	textSize(30);
 	strokeWeight(1);
-	text(("0"+pot).slice(-2),130,35);
+	text(("0"+pot).slice(-2),w/5,2*grad);
 	
 	r1.move();
 	r2.move();
 	if(b.toca(r1)) {
-		if(abs(b.velx) < 14) {
+		if(abs(b.velx) < 16) {
 			b.velx -= ace;
 		}
 		b.velx = b.velx * -1;
@@ -67,7 +67,7 @@ function Ret(x) {
 function Bola() {
 	this.x = w/2;
 	this.y = h/2;
-	this.d = 25;
+	this.d = 18;
 	this.velx = 5;
 	this.vely = random(-3,3);
 	
