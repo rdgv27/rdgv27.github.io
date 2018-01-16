@@ -37,7 +37,6 @@ function draw() {
 		if(b.controle) {
 			b.vely = b.vely + (b.y - r1.y)/10;
 			b.speedLim();
-			console.log(b.vely);
 			if(abs(b.velx) < 20) {
 				b.velx -= ace;
 			}
@@ -51,14 +50,11 @@ function draw() {
 		if(!b.controle) {
 			b.vely = b.vely + (b.y - r2.y)/imp;
 			b.speedLim();
-			console.log(b.vely);
 			b.velx = b.velx * -1;
 			b.x += 0.5*b.velx;
 			b.controle = true;
 		}
 	}
-
-	
 	r1.move();
 	r2.move();
 	r1.show();
@@ -112,7 +108,6 @@ function Bola() {
 	
 	this.toca = function(ret) {
 		if(abs(ret.x - this.x) <= (ret.w + this.d)/2 && abs(this.y - ret.y) <= (ret.h + 1.3*this.d)/2) {
-		//(this.y + this.d/4 >= ret.y - ret.h/2)&&(this.y - this.d/4 <= ret.y + ret.h/2)
 			return true;
 		} else {
 			return false;
