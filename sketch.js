@@ -1,7 +1,8 @@
 let w = 600;
 let h = 400;
 let grad = 20;
-let ace = 0.35;
+let ace = 0.3;
+let pot = 0;
 
 function setup() {
     createCanvas(w,h);
@@ -15,11 +16,28 @@ function draw() {
     stroke(255);
     strokeWeight(3);
     line(w/2,0,w/2,h-1);
-
+	
+	textSize(30);
+	strokeWeight(1);
+	text(("0"+pot).slice(-2),130,35);
+	
 	r1.move();
 	r2.move();
-	b.toca(r1);
-	b.toca(r2);
+	if(b.toca(r1)) {
+		if(abs(b.velx) < 14) {
+			b.velx -= ace;
+		}
+		b.velx = b.velx * -1;
+		b.x += b.velx;
+		pot += 1;
+	}
+	if(b.toca(r2)) {
+		if(abs(b.velx) < 14) {
+			b.velx += ace;
+		}
+		b.velx = b.velx * -1;
+		b.x += b.velx;
+	}
 	b.update();
 	r1.show();
 	r2.show();
@@ -50,7 +68,7 @@ function Bola() {
 	this.x = w/2;
 	this.y = h/2;
 	this.d = 25;
-	this.velx = 3;
+	this.velx = 5;
 	this.vely = random(-3,3);
 	
 	this.show = function() {
@@ -65,27 +83,19 @@ function Bola() {
 		if(this.y + this.d/2 > h-1 || this.y - this.d/2 < 0) {
 			this.vely = this.vely * -1;
 		}
-		if(this.x < grad || this.x > w-grad-1){
+		if(this.x < grad || this.x > w-grad-1) {
 			this.x = w/2;
 			this.y = h/2;
 			this.velx = 3;
 			this.vely = random(-3,3);
+			pot = 0;
 		}
 	}
 	this.toca = function(ret) {
-		if((abs(ret.x - this.x)<=(ret.w + this.d)/2)&&(this.y + this.d/4 >= ret.y - ret.h/2)&&(this.y - this.d/4 <= ret.y + ret.h/2)){
-			if(abs(this.velx) < 14){
-				if(this.velx > 0) {
-					this.velx += ace;
-				} else {
-					this.velx -= ace;
-				}
-			}
-			this.velx = this.velx * -1;
-			this.x += this.velx;
-			textSize(32);
-			text('00', 100,30);
-			fill(255);
+		if((abs(ret.x - this.x)<=(ret.w + this.d)/2)&&(this.y + this.d/4 >= ret.y - ret.h/2)&&(this.y - this.d/4 <= ret.y + ret.h/2)) {
+			return true;
+		} else {
+			return false;
 		}
 	}
 }
