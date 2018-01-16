@@ -3,9 +3,10 @@ let h = 600;
 let grad = 20;
 let ace = 0.35;
 let vel_ini = 5;
+let imp = 15;
 
 function setup() {
-    createCanvas(w, h);
+  	createCanvas(w, h);
 	ellipseMode(CENTER);
 	rectMode(CENTER);
 	b = new Bola();
@@ -14,10 +15,10 @@ function setup() {
 }
 
 function draw() {
-    background(51);
-    stroke(255);
-    strokeWeight(4);
-    line(w/2,0,w/2,h-1);
+  	background(51);
+  	stroke(255);
+  	strokeWeight(4);
+  	line(w/2,0,w/2,h-1);
 	noFill();
 	ellipse(w/2,h/2,w/6,w/6);
 	
@@ -34,6 +35,9 @@ function draw() {
 	
 	if(b.toca(r1)) {
 		if(b.controle) {
+			b.vely = b.vely + (b.y - r1.y)/10;
+			b.speedLim();
+			console.log(b.vely);
 			if(abs(b.velx) < 20) {
 				b.velx -= ace;
 			}
@@ -45,11 +49,16 @@ function draw() {
 	}
 	if(b.toca(r2)) {
 		if(!b.controle) {
+			b.vely = b.vely + (b.y - r2.y)/imp;
+			b.speedLim();
+			console.log(b.vely);
 			b.velx = b.velx * -1;
 			b.x += 0.5*b.velx;
 			b.controle = true;
 		}
 	}
+
+	
 	r1.move();
 	r2.move();
 	r1.show();
@@ -107,6 +116,17 @@ function Bola() {
 			return true;
 		} else {
 			return false;
+		}
+	}
+	
+	this.speedLim = function() {
+		let lim = 9;
+		if(abs(this.vely) > lim) {
+			if(this.vely > 0){
+				this.vely = lim;
+			} else {
+				this.vely = -lim;
+			}
 		}
 	}
 }
