@@ -1,2 +1,2 @@
 # rodrigo-ogava.github.io
-Esse é o jogo Pong feito por mim usando P5.js
+Projeto do clássico jogo [Pong](https://rodrigo-ogava.github.io) feito por Rodrigo Ogava usando P5.js
