@@ -3,7 +3,6 @@ let h = 600;
 let grad = 20;
 let ace = 0.35;
 let vel_ini = 5;
-let controle = false;
 
 function setup() {
     createCanvas(w, h);
@@ -19,6 +18,8 @@ function draw() {
     stroke(255);
     strokeWeight(4);
     line(w/2,0,w/2,h-1);
+	noFill();
+	ellipse(w/2,h/2,w/6,w/6);
 	
 	textSize(36);
 	strokeWeight(1);
@@ -32,21 +33,21 @@ function draw() {
 	}
 	
 	if(b.toca(r1)) {
-		if(controle) {
+		if(b.controle) {
 			if(abs(b.velx) < 20) {
 				b.velx -= ace;
 			}
 			b.velx = b.velx * -1;
 			b.x += 0.5*b.velx;
 			b.pont += 1;
-			controle = false;
+			b.controle = false;
 		} 
 	}
 	if(b.toca(r2)) {
-		if(!controle) {
+		if(!b.controle) {
 			b.velx = b.velx * -1;
 			b.x += 0.5*b.velx;
-			controle = true;
+			b.controle = true;
 		}
 	}
 	r1.move();
@@ -84,6 +85,7 @@ function Bola() {
 	this.velx = vel_ini;
 	this.vely = random(-4,4);
 	this.pont = 0;
+	this.controle = false;
 	
 	this.show = function() {
 		noStroke();
