@@ -2,8 +2,9 @@ let w = 900;
 let h = 600;
 let grad = 20;
 let ace = 0.35;
-let vel_ini = 5;
+let vel_ini = 6;
 let imp = 15;
+let recorde = 0;
 
 function setup() {
   	createCanvas(w, h);
@@ -23,9 +24,14 @@ function draw() {
 	ellipse(w/2,h/2,w/6,w/6);
 	
 	textSize(36);
-	strokeWeight(1);
+	strokeWeight(0);
 	fill(255);
 	text(("0"+b.pont).slice(-2),w/4.5,2*grad);
+	if(b.pont > recorde) {
+		recorde = b.pont;
+	}
+	textSize(18);
+	text("BEST: "+("0"+recorde).slice(-2),w-w/5,2*grad);
 	
 	b.update();
 	
@@ -88,7 +94,7 @@ function Bola() {
 	this.y = h/2;
 	this.d = 18;
 	this.velx = vel_ini;
-	this.vely = random(-4,4);
+	this.vely = random(-3,3);
 	this.pont = 0;
 	this.controle = false;
 	
