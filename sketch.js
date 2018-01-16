@@ -3,8 +3,6 @@ let h = 400;
 let grad = 20;
 let ace = 0.35;
 
-
-
 function setup() {
     createCanvas(w,h);
 	b = new Bola();
@@ -26,7 +24,6 @@ function draw() {
 	r1.show();
 	r2.show();
 	b.show();
-	
 }
 
 function Ret(x) {
@@ -64,11 +61,6 @@ function Bola() {
 		noStroke();
     	ellipse(this.x, this.y, this.d, this.d);
 		fill(255);
-		//this.c1 += random(-5,5);
-		//this.c2 += random(-5,5);
-		//this.c3 += random(-5,5);
-		//console.log(this.c1);
-		//fill(color(this.c1,this.c2,this.c3));
 	}
 	this.update = function() {
 		this.x = this.x + this.velx;
@@ -81,9 +73,6 @@ function Bola() {
 			this.y = h/2;
 			this.velx = 3;
 			this.vely = random(-3,3);
-			//this.c1 = random(255);
-			//this.c2 = random(255);
-			//this.c3 = random(255);
 		}
 	}
 	this.toca = function(ret) {
