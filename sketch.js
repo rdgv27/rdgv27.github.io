@@ -52,9 +52,6 @@ function Bola() {
 	this.d = 25;
 	this.velx = 3;
 	this.vely = random(-3,3);
-	this.c1 = random(255);
-	this.c2 = random(255);
-	this.c3 = random(255);
 	
 	this.show = function() {
 		ellipseMode(CENTER);
