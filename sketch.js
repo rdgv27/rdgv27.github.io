@@ -83,6 +83,9 @@ function Bola() {
 			}
 			this.velx = this.velx * -1;
 			this.x += this.velx;
+			textSize(32);
+			text('00', 100,30);
+			fill(255);
 		}
 	}
 }
