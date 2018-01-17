@@ -151,7 +151,7 @@ function Bola() {
 				this.hit = false;
 			} else if(!this.hit) {
 				this.hit = true;
-				this.y = this.y + 5*this.vely;
+				this.y = this.y + 10*this.vely;
 			}
 		}
 	}
