@@ -1,8 +1,8 @@
 let w = 900;
 let h = 600;
 let grad = 20;
-let ace = 0.5;
-let vel_ini = -5;
+let ace = 0.8;
+let vel_ini = -6;
 let imp = 15;
 let recorde = 0;
 let passo = 12;
@@ -68,7 +68,9 @@ function draw() {
 		}
 	}
 	r1.move();
-	r2.autoMove(b);
+	if(b.velx > 0 && b.x > w/2.5){
+		r2.autoMove(b);	
+	}
 	r1.show();
 	r2.show();
 	b.show();
@@ -97,10 +99,12 @@ function Ret(x) {
 	}
 	
 	this.autoMove = function(bola) {
-		if(this.i == 11) {
+		if(this.i == 2) {
 			let temp = this.dir;
-			if(bola.y < this.y + this.h/2 && bola.y > this.y - this.h/2) {
-				this.dir = 0;
+			if(bola.y < this.y + this.h/1.8 && bola.y > this.y - this.h/1.8) {
+				if(abs(bola.vely) < 4) {
+					this.dir = 0;	
+				}
 			} else if(bola.y > this.y) {
 				this.dir = 1;
 			} else {
@@ -110,12 +114,12 @@ function Ret(x) {
 				this.i = 0;
 			}
 		}
-		if(bola.velx > 0 && this.i < 12) {
+		if(this.i < 8) {
 			if((this.y + this.h/2 + passo < h-1 && this.dir == 1)||(this.y - this.h/2 - passo > 0 && this.dir == -1)) {
 				this.y += this.dir*passo;
 			}
 		} else {
-			if(this.i == 19) {
+			if(this.i == 10) {
 				this.i = 0;
 			}
 		}
@@ -147,6 +151,7 @@ function Bola() {
 				this.hit = false;
 			} else if(!this.hit) {
 				this.hit = true;
+				this.y = this.y + 5*this.vely;
 			}
 		}
 	}
@@ -160,7 +165,7 @@ function Bola() {
 	}
 	
 	this.speedLim = function() {
-		let lim = 9;
+		let lim = 10;
 		if(abs(this.vely) > lim) {
 			if(this.vely > 0){
 				this.vely = lim;
