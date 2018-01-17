@@ -67,8 +67,9 @@ function draw() {
 			b.controle = true;
 		}
 	}
+	
 	r1.move();
-	if(b.velx > 0 && b.x > w/2.5){
+	if(b.velx > 0 && b.x > w/2){
 		r2.autoMove(b);	
 	}
 	r1.show();
@@ -101,7 +102,7 @@ function Ret(x) {
 	this.autoMove = function(bola) {
 		if(this.i == 2) {
 			let temp = this.dir;
-			if(bola.y < this.y + this.h/1.8 && bola.y > this.y - this.h/1.8) {
+			if(bola.y < this.y + this.h/1.85 && bola.y > this.y - this.h/1.85) {
 				if(abs(bola.vely) < 4) {
 					this.dir = 0;	
 				}
@@ -152,12 +153,13 @@ function Bola() {
 			} else if(!this.hit) {
 				this.hit = true;
 				if(this.vely > 0) {
-					this.y -= 18;
+					this.y += 19;
 				} else { 
-					this.y += 18;
+					this.y -= 19;
 				}
-				
 			}
+		} else {
+			this.hit = true;
 		}
 	}
 	
