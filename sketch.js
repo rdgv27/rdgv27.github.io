@@ -74,7 +74,7 @@ function Ret(x) {
 	this.y = h/2;
 	this.w = 8;
 	this.h = h/6;
-	this.i = 9;
+	this.i = 0;
 	this.dir = 1;
 	
 	this.show = function() {
@@ -92,7 +92,8 @@ function Ret(x) {
 	}
 	
 	this.autoMove = function(bola) {
-		if(this.i == 13) {
+		if(this.i == 12) {
+			let temp = this.dir;
 			if(bola.y < this.y + this.h/2 && bola.y > this.y - this.h/2) {
 				this.dir = 0;
 			} else if(bola.y > this.y) {
@@ -100,21 +101,27 @@ function Ret(x) {
 			} else {
 				this.dir = -1;
 			}
-			this.i = 0;
-		}
-		if(bola.velx > 0) {
-			if((this.y + this.h/2 + passo < h-1 && this.dir == 1) || (this.y - this.h/2 - passo > 0 && this.dir == -1)) {
-				this.y += this.dir*passo;
+			if(temp == this.dir){
+				this.i = 0;
 			}
 		}
-		this.i = this.i + 1;
+		if(bola.velx > 0 && this.i < 12) {
+			if((this.y + this.h/2 + passo < h-1 && this.dir == 1)||(this.y - this.h/2 - passo > 0 && this.dir == -1)) {
+				this.y += this.dir*passo;
+			}
+		} else {
+			if(this.i == 20) {
+				this.i = 0;
+			}
+		}
+		this.i++;
 	}
 }
 
 function Bola() {
 	this.x = w/2;
 	this.y = h/2;
-	this.d = 18;
+	this.d = 17;
 	this.velx = vel_ini;
 	this.vely = random(-3,3);
 	this.pont = 0;
@@ -129,7 +136,7 @@ function Bola() {
 	this.update = function() {
 		this.x = this.x + this.velx;
 		this.y = this.y + this.vely;
-		if(this.y + this.d/2 > h-1 || this.y - this.d/2 < 0) {
+		if(this.y + this.d/2  >= h-1 || this.y - this.d/2 <= 0) {
 			this.vely = this.vely * -1;
 		}
 	}
