@@ -5,6 +5,7 @@ let ace = 0.35;
 let vel_ini = 6;
 let imp = 15;
 let recorde = 0;
+let passo = 12;
 
 function setup() {
   	createCanvas(w, h);
@@ -62,7 +63,7 @@ function draw() {
 		}
 	}
 	r1.move();
-	r2.move();
+	r2.autoMove(b);
 	r1.show();
 	r2.show();
 	b.show();
@@ -73,6 +74,8 @@ function Ret(x) {
 	this.y = h/2;
 	this.w = 8;
 	this.h = h/6;
+	this.i = 9;
+	this.dir = 1;
 	
 	this.show = function() {
 		noStroke();
@@ -81,11 +84,30 @@ function Ret(x) {
 	}
 	
 	this.move = function() {
-		if(keyIsDown(UP_ARROW) && this.y - this.h/2 > 7){
-			this.y -= 12;
-		} else if (keyIsDown(DOWN_ARROW) && this.y + this.h/2 < h-8){
-			this.y += 12;
+		if(keyIsDown(UP_ARROW) && this.y - this.h/2 - passo > 0){
+			this.y -= passo;
+		} else if (keyIsDown(DOWN_ARROW) && this.y + this.h/2 + passo < h-1){
+			this.y += passo;
 		}
+	}
+	
+	this.autoMove = function(bola) {
+		if(this.i == 13) {
+			if(bola.y < this.y + this.h/2 && bola.y > this.y - this.h/2) {
+				this.dir = 0;
+			} else if(bola.y > this.y) {
+				this.dir = 1;
+			} else {
+				this.dir = -1;
+			}
+			this.i = 0;
+		}
+		if(bola.velx > 0) {
+			if((this.y + this.h/2 + passo < h-1 && this.dir == 1) || (this.y - this.h/2 - passo > 0 && this.dir == -1)) {
+				this.y += this.dir*passo;
+			}
+		}
+		this.i = this.i + 1;
 	}
 }
 
