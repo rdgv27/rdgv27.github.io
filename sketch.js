@@ -1,11 +1,12 @@
 let w = 900;
 let h = 600;
 let grad = 20;
-let ace = 0.35;
-let vel_ini = 6;
+let ace = 0.5;
+let vel_ini = -5;
 let imp = 15;
 let recorde = 0;
 let passo = 12;
+let pont = 0;
 
 function setup() {
   	createCanvas(w, h);
@@ -27,29 +28,33 @@ function draw() {
 	textSize(36);
 	strokeWeight(0);
 	fill(255);
-	text(("0"+b.pont).slice(-2),w/4.5,2*grad);
-	if(b.pont > recorde) {
-		recorde = b.pont;
+	text(("0"+pont).slice(-2),w/4.5,2*grad);
+	if(pont > recorde) {
+		recorde = pont;
 	}
 	textSize(18);
 	text("BEST: "+("0"+recorde).slice(-2),w-w/5,2*grad);
 	
 	b.update();
 	
-	if(b.x < 0 || b.x > w-1) {
+	if(b.x < 0){
 		b = new Bola();
+		pont = 0;
+	} else if(b.x > w-1) {
+		b = new Bola();
+		pont += 3;
 	}
 	
 	if(b.toca(r1)) {
 		if(b.controle) {
 			b.vely = b.vely + (b.y - r1.y)/10;
 			b.speedLim();
-			if(abs(b.velx) < 20) {
+			if(abs(b.velx) < 25) {
 				b.velx -= ace;
 			}
 			b.velx = b.velx * -1;
 			b.x += 0.5*b.velx;
-			b.pont += 1;
+			pont += 1;
 			b.controle = false;
 		} 
 	}
@@ -124,8 +129,7 @@ function Bola() {
 	this.d = 17;
 	this.velx = vel_ini;
 	this.vely = random(-3,3);
-	this.pont = 0;
-	this.controle = false;
+	this.controle = true;
 	
 	this.show = function() {
 		noStroke();
