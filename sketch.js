@@ -151,9 +151,9 @@ function Bola() {
 				this.hit = false;
 			} else if(!this.hit) {
 				this.hit = true;
-				if(this.vely > 0);{
+				if(this.vely > 0) {
 					this.y -= 18;
-				} else {
+				} else { 
 					this.y += 18;
 				}
 				
