@@ -7,6 +7,7 @@ let imp = 15;
 let recorde = 0;
 let passo = 12;
 let pont = 0;
+let pressed = false;
 
 function setup() {
   	createCanvas(w, h);
@@ -96,6 +97,12 @@ function Ret(x) {
 			this.y -= passo;
 		} else if (keyIsDown(DOWN_ARROW) && this.y + this.h/2 + passo < h-1){
 			this.y += passo;
+		} else if(pressed) {
+			if(mouseY < h/2 && this.y - this.h/2 - passo > 0) {
+				this.y -= passo;
+			} else if(mouseY > h/2 && this.y + this.h/2 + passo < h-1) {
+				this.y += passo;
+			}
 		}
 	}
 	
@@ -181,5 +188,13 @@ function Bola() {
 			}
 		}
 	}
+}
+
+function touchStarted() {
+	pressed = true;
+}
+	
+function touchEnded() {
+	pressed = false;
 }
 
