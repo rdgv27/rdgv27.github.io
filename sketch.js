@@ -25,7 +25,6 @@ function draw() {
   	line(w/2,0,w/2,h-1);
 	noFill();
 	ellipse(w/2,h/2,w/6,w/6);
-	
 	textSize(36);
 	strokeWeight(0);
 	fill(255);
