@@ -25,6 +25,7 @@ function draw() {
   	line(w/2,0,w/2,h-1);
 	noFill();
 	ellipse(w/2,h/2,w/6,w/6);
+	
 	textSize(36);
 	strokeWeight(0);
 	fill(255);
@@ -36,7 +37,6 @@ function draw() {
 	text("BEST: "+("0"+recorde).slice(-2),w-w/5,2*grad);
 	
 	b.update();
-	
 	if(b.x < 0){
 		b = new Bola();
 		pont = 0;
@@ -196,4 +196,3 @@ function touchStarted() {
 function touchEnded() {
 	pressed = false;
 }
-
